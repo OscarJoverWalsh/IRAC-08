@@ -30,20 +30,13 @@ Implementación del cliente de visualización y análisis de métricas-->
     </div>
 
     <div align="center">
-      <canvas id="myChart" height="360" style="border:5px solid #000000;">
+      <canvas id="chart" height="360" style="border:5px solid #000000;">
       </canvas>
     </div>
     
     <script>
-      function currentTime() {
-        var date = new Date();
-        return date.getHours() + ":" + (date.getMinutes()<10?'0':'') + date.getMinutes() + "," + (date.getSeconds()<10?'0':'') + date.getSeconds();
-      }
-
-      console.log("Page loading time " + currentTime());
-
-      var ctx = document.getElementById("myChart").getContext("2d");
-      var myChart = new Chart(ctx, {
+      var ctx = document.getElementById("chart").getContext("2d");
+      var chart = new Chart(ctx, {
         type: 'bar',
         data: {
           labels: [currentTime()],
@@ -104,10 +97,17 @@ Implementación del cliente de visualización y análisis de métricas-->
         init();
       });
 
-      function addData(chart, label,new_buffer, new_bitrate) {
+      function currentTime() {
+        var date = new Date();
+        return date.getHours() + ":" + (date.getMinutes()<10?'0':'') + date.getMinutes() + "," + (date.getSeconds()<10?'0':'') + date.getSeconds();
+      }
+
+      console.log("Page loading time " + currentTime());
+
+      function Data(chart, label, buffer, bitrate) {
         chart.data.labels.push(label);
-        chart.data.datasets[1].data.push(new_buffer);
-        chart.data.datasets[0].data.push(new_bitrate);
+        chart.data.datasets[1].data.push(buffer);
+        chart.data.datasets[0].data.push(bitrate);
         chart.update();
      }
 
@@ -142,7 +142,7 @@ Implementación del cliente de visualización y análisis de métricas-->
                 )
               : NaN;
 
-            addData(myChart,currentTime(), bufferLevel, bitrate);
+            Data(chart, currentTime(), bufferLevel, bitrate);
 
             document.getElementById("buffer").innerText = bufferLevel;
             document.getElementById("bitrate").innerText = bitrate;
