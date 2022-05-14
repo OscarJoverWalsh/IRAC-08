@@ -1,0 +1,33 @@
+<!--IRAC Práctica 3
+Guillermo Garcia Avalos, Manuel García Gómez, Oscar Jover Walsh, Alejandro Moral Pérez
+
+Introducción a dash.js-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> IRAC Practica 3.1 </title>
+    </head>
+    
+    <body align="center">
+		<h1> IRAC - Group 08 </h1>
+		<h3> Guillermo Garcia Avalos, Manuel Garcia Gomez, Oscar Jover Walsh, Alejandro Moral Perez </h3>
+
+        <video class="dashjs-player" width="1280" height="720" autoplay controls preload="auto">
+		<source src="https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd" type="application/dash+xml"/>
+		</video>
+
+		<script>
+			var player;
+			document.addEventListener("DOMContentLoaded", function(){
+				init();
+			});
+			function init(){
+				player = dashjs.MediaPlayerFactory.create(document.querySelector(".dashjs-player"));
+			};
+		</script>
+
+		<script src="http://cdn.dashjs.org/latest/dash.all.min.js">
+		</script>
+    </body>
+</html>
